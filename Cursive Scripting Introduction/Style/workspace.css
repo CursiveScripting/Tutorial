@@ -20,3 +20,7 @@
 #processList .hidden {
     display: none;
 }
+
+#processColumn .caption {
+    white-space: pre-line;
+}

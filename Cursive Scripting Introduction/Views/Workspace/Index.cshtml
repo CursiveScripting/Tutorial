@@ -13,6 +13,42 @@
     <title>Cursive Scripting Demo</title>
     @Scripts.Render("~/bundles/cursiveScript")
     @Styles.Render("~/bundles/cursiveStyle")
+
+    <style type="text/css">
+@if (Model.FixedSingleProcess)
+{
+    <text>
+    #variableList::before, #processList .addNew, #processList li.fixed {
+        display: none;
+    }
+    </text>
+
+    if (Model.DisableVariables)
+    {
+    <text>
+    #variableList {
+        display: none;
+    }    
+    </text>
+    }
+}
+else if (Model.DisableVariables)
+{
+    <text>
+    #variableList li {
+        display: none;
+    }
+    </text>
+}
+@if (Model.HideProcessFilter)
+{
+    <text>
+    #processColumn .processFilters {
+        display: none;
+    }
+    </text>
+}
+    </style>
 </head>
 <body>
     <div id="wrapper">
@@ -23,7 +59,7 @@
                 </div>
             </div>
             <div id="processListScroll">
-                <h2>Processes</h2><div class="caption">Drag to use, double click to edit</div>
+                <h2>Processes</h2><div class="caption">@Model.ProcessListCaption</div>
                 <div class="processFilters"><input type="text" id="txtSearch" placeholder="Filter processes..." onkeyup="filterProcesses()" onchange="filterProcesses()" /></div>
                 <ul id="processList"></ul>
             </div>

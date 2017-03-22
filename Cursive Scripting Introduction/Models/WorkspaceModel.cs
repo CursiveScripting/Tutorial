@@ -18,5 +18,10 @@ namespace Cursive_Scripting_Introduction.Models
 
         public string WorkspaceDefinition { get; }
         public string ProcessDefinition { get; }
+
+        public bool FixedSingleProcess { get; set; } = false;
+        public bool DisableVariables { get; set; } = false;
+        public bool HideProcessFilter { get; set; } = false;
+        public string ProcessListCaption { get; set; } = "Drag to use, click to edit";
     }
 }
