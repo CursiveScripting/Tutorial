@@ -1,0 +1,91 @@
+﻿@using System.Web.Optimization
+@model Cursive_Scripting_Introduction.Models.WorkspaceModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cursive Scripting Demo</title>
+    @Scripts.Render("~/bundles/cursiveScript")
+    @Styles.Render("~/bundles/cursiveStyle")
+</head>
+<body>
+    <div id="wrapper">
+        <div id="processColumn">
+            <div id="actionButtons">
+                <div id="saveButton">
+                    Test process
+                </div>
+            </div>
+            <div id="processListScroll">
+                <h2>Processes</h2><div class="caption">Drag to use, double click to edit</div>
+                <div class="processFilters"><input type="text" id="txtSearch" placeholder="Filter processes..." onkeyup="filterProcesses()" onchange="filterProcesses()" /></div>
+                <ul id="processList"></ul>
+            </div>
+        </div>
+        <div id="editorColumn">
+            <ul id="variableList"></ul>
+            <div id="editArea"></div>
+        </div>
+    </div>
+
+    <script>
+var workspace;
+
+function sendRequest(url, onSuccess) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+
+    request.onload = function () {
+        if ((request.status >= 200 || request.status == 0) && request.status < 400)
+            onSuccess(request.responseXML);
+        else
+            console.log('error', request);
+    };
+    request.send();
+}
+
+var parser = new DOMParser();
+var workspace = new Cursive.Workspace(
+    parser.parseFromString('@Html.Raw(Model.WorkspaceDefinition.Replace("'", "\\'"))', 'text/xml'),
+    document.getElementById('processList'),
+    document.getElementById('variableList'),
+    document.getElementById('editArea')
+);
+@if (!string.IsNullOrEmpty(Model.ProcessDefinition)) {
+@:workspace.loadProcesses(parser.parseFromString('@Html.Raw(Model.ProcessDefinition.Replace("'", "\\'"))', 'text/xml'));
+}
+workspace.ready();
+
+document.getElementById('saveButton').addEventListener('click', function () {
+    console.log('saved processes:', workspace.saveProcesses());
+});
+
+function filterProcesses() {
+    var filter = document.getElementById('txtSearch').value.trim();
+    var list = document.getElementById('processList');
+    if (filter == '') {
+        var hidden = list.querySelectorAll('li.hidden');
+        for (var i = 0; i < hidden.length; i++) {
+            hidden[i].classList.remove('hidden');
+        }
+        return;
+    }
+    console.log('filtering');
+    var processes = list.querySelectorAll('li:not(.folder):not(.addNew)');
+    for (var i = 0; i < processes.length; i++) {
+        var process = processes[i];
+        if (process.innerText.indexOf(filter) != -1)
+            process.classList.remove('hidden');
+        else
+            process.classList.add('hidden');
+    }
+}
+    </script>
+</body>
+</html>

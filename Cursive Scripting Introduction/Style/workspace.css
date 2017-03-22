@@ -1,0 +1,22 @@
+﻿#actionButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#actionButtons > * {
+    border: 1px solid black;
+    border-radius: 0.5em;
+    font-size: larger;
+    cursor: pointer;
+    padding: 0.5em;
+}
+
+#actionButtons > *:hover {
+    background-color: #ffc;
+}
+
+#processList .hidden {
+    display: none;
+}

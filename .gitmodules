@@ -1,0 +1,8 @@
+[submodule "Runtime"]
+	path = Runtime
+	url = git@github.com:CursiveScripting/CSharpRuntime.git
+	branch = master
+[submodule "WebUI"]
+	path = WebUI
+	url = git@github.com:CursiveScripting/WebUI.git
+	branch = master
