@@ -11,7 +11,21 @@
 </head>
 <body>
     <div>
-        This is the demo site thing. It represents a series of lessons introducing a new user to the Cursive Scripting UI. @Html.ActionLink("Lesson 1 can be found here.", "Lesson1", "Workspace")
+        <h1>Introduction to Cursive Scripting</h1>
+        <p>
+            This series of tutorials is intended to introduce a new user to the Cursive Scripting UI.
+            Each lesson presents you with an existing script, which you can run and view the output of,
+            and instructs you to modify it to produce different output.
+        </p>
+        <ol style="list-style-type:circle; font-size: 1.5em">
+            <li>@Html.ActionLink("Lesson 1: The bare minimum", "Lesson1", "Workspace")</li>
+            <li>@Html.ActionLink("Lesson 2: Return paths", "Lesson2", "Workspace")</li>
+            <li>@Html.ActionLink("Lesson 3: Fixed inputs", "Lesson3", "Workspace")</li>
+            <li>@Html.ActionLink("Lesson 4: Variables", "Lesson4", "Workspace")</li>
+            <li>@Html.ActionLink("Lesson 5: Process parameters", "Lesson5", "Workspace")</li>
+            <li>@Html.ActionLink("Lesson 6: Multiple processes", "Lesson6", "Workspace")</li>
+        </ol>
+        
     </div>
 </body>
 </html>
